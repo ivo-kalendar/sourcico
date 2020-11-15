@@ -1,0 +1,3 @@
+export const GET_AUTHORS = 'GET_AUTHORS';
+export const FILTER_AUTHORS = 'FILTER_AUTHORS';
+export const CLEAR_FILTER = 'CLEAR_FILTER';
