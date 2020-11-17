@@ -5,7 +5,7 @@ const FilterAuthors = () => {
     const context = useContext(Context);
     const text = useRef('');
 
-    const { filterAuthors, clearFilter, filtered } = context;
+    let { filterAuthors, getFilteredAuthors, clearFilter, filtered } = context;
 
     useEffect(() => {
         if (filtered === null) {
@@ -15,6 +15,7 @@ const FilterAuthors = () => {
 
     const onChange = (e) => {
         if (text.current.value !== '') {
+            getFilteredAuthors(e.target.value);
             filterAuthors(e.target.value);
         } else {
             clearFilter();

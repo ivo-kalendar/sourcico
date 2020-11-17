@@ -1,20 +1,19 @@
 import React, { useContext, useEffect } from 'react';
 import Context from '../context/context';
+import Spiner from '../layout/Spinner';
 import AuthorsItem from './AuthorsItem';
 
 const Authors = () => {
     const context = useContext(Context);
 
-    const { authors, filtered, getAuthors, loading } = context;
+    const { authors, filtered, loading, getAllAuthors } = context;
 
     useEffect(() => {
-        getAuthors();
+        getAllAuthors();
         // eslint-disasble-next-line
     }, []);
 
-    if (authors.length === 0) {
-        return <h4>No Authors</h4>;
-    }
+    if (loading) return <Spiner />;
 
     return (
         <>

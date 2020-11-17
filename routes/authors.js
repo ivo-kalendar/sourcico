@@ -32,7 +32,6 @@ router.get('/name/:name', (req, res) => {
         }
     });
     let authorsArr = matchResult.filter((x) => x != null);
-
     res.status(200).json(authorsArr);
 });
 

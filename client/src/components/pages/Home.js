@@ -1,6 +1,6 @@
 import React from 'react';
-import Authors from '../modals/Authors';
-import FilterAuthors from '../modals/FilterAuthors';
+import Authors from '../authors/Authors';
+import FilterAuthors from '../authors/FilterAuthors';
 
 const Home = () => {
     return (

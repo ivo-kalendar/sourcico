@@ -1,7 +1,8 @@
-import Spinner from './components/layout/Spinner';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
+import Books from './components/pages/Books';
+import Series from './components/pages/Series';
 import About from './components/pages/About';
 
 import AuthorsState from './components/context/AuthorsState';
@@ -14,8 +15,12 @@ function App() {
                 <div>
                     <Navbar />
                     <div className='container'>
-                        <Route exact path='/' component={Home} />
-                        <Route exact path='/about' component={About} />
+                        <Switch>
+                            <Route exact path='/' component={Home} />
+                            <Route exact path='/books' component={Books} />
+                            <Route exact path='/series' component={Series} />
+                            <Route exact path='/about' component={About} />
+                        </Switch>
                     </div>
                 </div>
             </Router>

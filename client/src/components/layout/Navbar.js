@@ -6,11 +6,17 @@ const Navbar = () => {
     return (
         <div className='navbar bg-primary'>
             <h1>
-                <GiWhiteBook /> Authors
+                <GiWhiteBook /> Books
             </h1>
             <ul>
                 <li>
-                    <Link to='/'>Home</Link>
+                    <Link to='/'>Authors</Link>
+                </li>
+                <li>
+                    <Link to='/books'>Titles</Link>
+                </li>
+                <li>
+                    <Link to='/series'>Series</Link>
                 </li>
                 <li>
                     <Link to='/about'>About</Link>
