@@ -2,8 +2,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Get DataBase File
-
 // Init Middleware
 app.use(express.json({ extended: false }));
 app.use('/static', express.static(path.join(__dirname, 'public')));

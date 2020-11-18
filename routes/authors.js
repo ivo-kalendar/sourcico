@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const data = require('../config/db');
 
-// @route   GET api/authors/name/:name
-// @des     Get all users that matched the name
-// @access  author.name && author.books.length
+// @route   GET api/authors/name
+// @des     Get all users in the database
+// @access  author.name && author.books.length && author.id
 router.get('/name', (req, res) => {
     const authors = data.map((author) => {
         let auth = {
@@ -17,6 +17,9 @@ router.get('/name', (req, res) => {
     res.status(200).json(authors);
 });
 
+// @route   GET api/authors/name/:name
+// @des     Get all users that matched the name
+// @access  author.name && author.books.length && author.id
 router.get('/name/:name', (req, res) => {
     let regExp = new RegExp(req.params.name, 'gi');
 

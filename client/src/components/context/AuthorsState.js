@@ -3,70 +3,60 @@ import Context from './context';
 import axios from 'axios';
 import reducer from './reducer';
 import {
-    GET_ALL_AUTHORS,
+    LOAD_BETWEEN_GET,
     GET_FILTERED_AUTHORS,
-    FILTER_AUTHORS,
-    CLEAR_FILTER,
+    GET_AUTHORS_BY_ID,
 } from './types';
 
 const AuthorsState = (props) => {
     const initialState = {
-        authors: [],
-        filtered: null,
+        authorId: [],
         loading: true,
+        authors: [],
     };
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    // Get Authors
-    const getAllAuthors = async () => {
-        try {
-            const res = await axios.get('/api/authors/name/');
-
-            dispatch({
-                type: GET_ALL_AUTHORS,
-                payload: res.data,
-            });
-        } catch (err) {
-            console.log(err);
-        }
+    // Set Loading to true between get methods
+    const loadBetweenGet = () => {
+        dispatch({ type: LOAD_BETWEEN_GET });
     };
 
     // Get Filtered Authors directlly from backend
     const getFilteredAuthors = async (search) => {
         try {
-            state.loading = false;
             const res = await axios.get(`api/authors/name/${search}`);
 
             dispatch({
                 type: GET_FILTERED_AUTHORS,
                 payload: res.data,
             });
-            state.loading = true;
         } catch (err) {
             console.log(err);
         }
     };
 
-    // Filter Authors
-    const filterAuthors = async (text) => {
-        dispatch({ type: FILTER_AUTHORS, payload: text });
-    };
+    const getAuthorsById = async (id) => {
+        try {
+            const res = await axios.get(`api/authors/id/${id}`);
 
-    // Clear Filter
-    const clearFilter = () => {
-        dispatch({ type: CLEAR_FILTER });
+            dispatch({
+                type: GET_AUTHORS_BY_ID,
+                payload: res.data,
+            });
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
         <Context.Provider
             value={{
-                authors: state.authors,
-                filtered: state.filtered,
+                authorId: state.authorId,
                 loading: state.loading,
-                filterAuthors,
-                clearFilter,
-                getAllAuthors,
+                authors: state.authors,
                 getFilteredAuthors,
+                getAuthorsById,
+                loadBetweenGet,
             }}>
             {props.children}
         </Context.Provider>

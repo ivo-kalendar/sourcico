@@ -1,39 +1,30 @@
 import {
-    GET_ALL_AUTHORS,
+    LOAD_BETWEEN_GET,
     GET_FILTERED_AUTHORS,
-    FILTER_AUTHORS,
-    CLEAR_FILTER,
+    GET_AUTHORS_BY_ID,
 } from './types';
 
+// eslint-disable-next-line
 export default (state, action) => {
     switch (action.type) {
-        case GET_ALL_AUTHORS: {
+        case GET_AUTHORS_BY_ID: {
             return {
                 ...state,
-                authors: action.payload,
                 loading: false,
+                authorId: action.payload,
             };
         }
         case GET_FILTERED_AUTHORS: {
             return {
                 ...state,
-                filtered: action.payload,
                 loading: false,
+                authors: action.payload,
             };
         }
-        case FILTER_AUTHORS: {
+        case LOAD_BETWEEN_GET: {
             return {
                 ...state,
-                filtered: state.authors.filter((author) => {
-                    const regExp = new RegExp(`${action.payload}`, 'gi');
-                    return author.name.match(regExp);
-                }),
-            };
-        }
-        case CLEAR_FILTER: {
-            return {
-                ...state,
-                filtered: null,
+                loading: true,
             };
         }
         default:
