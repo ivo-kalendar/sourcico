@@ -6,13 +6,15 @@ import {
     LOAD_BETWEEN_GET,
     GET_FILTERED_AUTHORS,
     GET_AUTHORS_BY_ID,
+    GET_FILTERED_TITLES,
 } from './types';
 
 const AuthorsState = (props) => {
     const initialState = {
-        authorId: [],
         loading: true,
+        authorId: [],
         authors: [],
+        books: [],
     };
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -48,14 +50,30 @@ const AuthorsState = (props) => {
         }
     };
 
+    // Get Filtered Books directlly from backend
+    const getFilteredTitles = async (search) => {
+        try {
+            const res = await axios.get(`api/books/title/${search}`);
+
+            dispatch({
+                type: GET_FILTERED_TITLES,
+                payload: res.data,
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         <Context.Provider
             value={{
-                authorId: state.authorId,
                 loading: state.loading,
+                authorId: state.authorId,
                 authors: state.authors,
+                books: state.books,
                 getFilteredAuthors,
                 getAuthorsById,
+                getFilteredTitles,
                 loadBetweenGet,
             }}>
             {props.children}

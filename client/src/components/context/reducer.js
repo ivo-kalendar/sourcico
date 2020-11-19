@@ -2,6 +2,7 @@ import {
     LOAD_BETWEEN_GET,
     GET_FILTERED_AUTHORS,
     GET_AUTHORS_BY_ID,
+    GET_FILTERED_TITLES,
 } from './types';
 
 // eslint-disable-next-line
@@ -19,6 +20,13 @@ export default (state, action) => {
                 ...state,
                 loading: false,
                 authors: action.payload,
+            };
+        }
+        case GET_FILTERED_TITLES: {
+            return {
+                ...state,
+                loading: false,
+                books: action.payload,
             };
         }
         case LOAD_BETWEEN_GET: {
