@@ -37,7 +37,7 @@ const AuthorsState = (props) => {
 
     const getAuthorsById = async (id) => {
         try {
-            const res = await axios.get(`api/authors/id/${id}`);
+            const res = await axios.get(`api/authors/id/${id.toString()}`);
 
             dispatch({
                 type: GET_AUTHORS_BY_ID,
