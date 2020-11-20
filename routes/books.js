@@ -49,36 +49,82 @@ router.get('/title/:title', (req, res) => {
     res.status(200).json(books);
 });
 
+// @data    change the datastructure for the series routes
+let booksArr1 = [];
+
+data.map((author) => {
+    author.books.map((b) => {
+        if (b.series) {
+            booksArr1.push({
+                id: `${author.id}${b.id}`,
+                title: b.title,
+                series: b.series,
+                author: author.name,
+                titles: [],
+            });
+        }
+        return booksArr1;
+    });
+});
+
+let booksArr2 = booksArr1;
+
+booksArr1.map((a) => {
+    booksArr2.map((b, i) => {
+        if (a.series === b.series) {
+            booksArr2.push({
+                id: i,
+                series: b.series,
+                titles: a.titles.push(b.title),
+            });
+        }
+    });
+    return booksArr2;
+});
+
+let booksArr3 = [];
+
+for (let i = 0; i < booksArr2.length; i++) {
+    booksArr3.push(booksArr2[i].series);
+}
+
+let booksArr4 = booksArr2.filter(
+    (item, index) => booksArr3.indexOf(item.series) === index
+);
+
+let filteredArr = [];
+
+booksArr4.map((el) => {
+    filteredArr.push({
+        id: el.id,
+        series: el.series,
+        author: el.author,
+        titles: el.titles,
+    });
+});
+
+// @route   GET api/books/series/
+// @des     Get all objects of the books and map new objects
+// @access  obj.books.series && obj.name && obj.books.seriesTitle
+router.get('/series', (req, res) => {
+    res.status(200).json(filteredArr);
+});
+
 // @route   GET api/books/series/:series
 // @des     Get all objects of the books that matched the series
 // @access  obj.books.series && obj.name && obj.books.seriesTitle
 router.get('/series/:series', (req, res) => {
     let regExp = new RegExp(req.params.series, 'gi');
-    let author = data.map((author) => author);
-    let books = [];
 
-    for (let i = 0; i < author.length; i++) {
-        for (let j = 0; j < author[i].books.length; j++) {
-            books.push({
-                series: author[i].books[j].series,
-                title: author[i].books[j].title,
-                name: author[i].name,
-            });
-        }
-    }
+    filteredArr = filteredArr
+        .map((obj) => {
+            if (obj.series.match(regExp)) {
+                return obj;
+            }
+        })
+        .filter((x) => x != null);
 
-    books = books.map((book) => {
-        if (book.series && book.series.match(regExp)) {
-            return book;
-        }
-    });
-
-    books = books.filter((x) => x != null);
-
-    res.status(200).json({
-        matchResult: books.length,
-        books,
-    });
+    res.status(200).json(filteredArr);
 });
 
 module.exports = router;
