@@ -6,17 +6,17 @@ const app = express();
 app.use(express.json({ extended: false }));
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-    res.json({
-        msg: 'Welcome to the Authors Project',
-        author: 'Ivo Kalendarov',
-        mail: 'ivokalendar@icloud.com',
-    });
-});
-
 // Define Routes
 app.use('/api/authors', require('./routes/authors'));
 app.use('/api/books', require('./routes/books'));
+
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use('*', (req, res) =>
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    );
+}
 
 const PORT = process.env.PORT || 7788;
 
