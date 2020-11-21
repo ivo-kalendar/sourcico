@@ -3,6 +3,7 @@ import {
     GET_FILTERED_AUTHORS,
     GET_AUTHORS_BY_ID,
     GET_FILTERED_TITLES,
+    GET_FILTERED_SERIES,
 } from './types';
 
 // eslint-disable-next-line
@@ -27,6 +28,13 @@ export default (state, action) => {
                 ...state,
                 loading: false,
                 books: action.payload,
+            };
+        }
+        case GET_FILTERED_SERIES: {
+            return {
+                ...state,
+                loading: false,
+                seriesObj: action.payload,
             };
         }
         case LOAD_BETWEEN_GET: {

@@ -50,64 +50,51 @@ router.get('/title/:title', (req, res) => {
 });
 
 // @data    change the datastructure for the series routes
-let booksArr1 = [];
-
-data.map((author) => {
-    author.books.map((b) => {
-        if (b.series) {
-            booksArr1.push({
-                id: `${author.id}${b.id}`,
-                title: b.title,
-                series: b.series,
-                author: author.name,
-                titles: [],
-            });
-        }
-        return booksArr1;
-    });
-});
-
-let booksArr2 = booksArr1;
-
-booksArr1.map((a) => {
-    booksArr2.map((b, i) => {
-        if (a.series === b.series) {
-            booksArr2.push({
-                id: i,
-                series: b.series,
-                titles: a.titles.push(b.title),
-            });
-        }
-    });
-    return booksArr2;
-});
-
-let booksArr3 = [];
-
-for (let i = 0; i < booksArr2.length; i++) {
-    booksArr3.push(booksArr2[i].series);
+class Series {
+    constructor(id, series, title, author) {
+        this.id = id;
+        this.series = series;
+        this.author = author;
+        this.titles = title;
+    }
 }
 
-let booksArr4 = booksArr2.filter(
-    (item, index) => booksArr3.indexOf(item.series) === index
-);
+let finalData = [];
+let seriesArr = [];
+let titlesArr = [];
 
-let filteredArr = [];
-
-booksArr4.map((el) => {
-    filteredArr.push({
-        id: el.id,
-        series: el.series,
-        author: el.author,
-        titles: el.titles,
+data.map((author) => {
+    author.books.map(({ title, series, id }, i) => {
+        if (series) {
+            seriesArr.push(series),
+                titlesArr.push(new Series(id, series, title, author.name));
+        }
     });
+});
+
+seriesArr = [...new Set(seriesArr)];
+
+seriesArr.every((val) => {
+    let titles = [];
+    let author;
+    let id;
+    for (let i = 0; i < titlesArr.length; i++) {
+        if (val === titlesArr[i].series) {
+            titles.push(titlesArr[i].titles);
+            author = titlesArr[i].author;
+            id = titlesArr[i].id;
+        }
+    }
+    finalData.push(new Series(id, val, titles, author));
+    return val;
 });
 
 // @route   GET api/books/series/
 // @des     Get all objects of the books and map new objects
 // @access  obj.books.series && obj.name && obj.books.seriesTitle
+
 router.get('/series', (req, res) => {
-    res.status(200).json(filteredArr);
+    res.status(200).json(finalData);
 });
 
 // @route   GET api/books/series/:series
@@ -116,15 +103,13 @@ router.get('/series', (req, res) => {
 router.get('/series/:series', (req, res) => {
     let regExp = new RegExp(req.params.series, 'gi');
 
-    filteredArr = filteredArr
-        .map((obj) => {
-            if (obj.series.match(regExp)) {
-                return obj;
-            }
-        })
-        .filter((x) => x != null);
+    matchData = finalData.map((obj) => {
+        if (obj.series.match(regExp)) return obj;
+    });
 
-    res.status(200).json(filteredArr);
+    matchData = matchData.filter((x) => x != null);
+
+    res.status(200).json(matchData);
 });
 
 module.exports = router;

@@ -1,17 +1,14 @@
 import React from 'react';
-// import Titles from '../books/Titles';
-// import FilterTitles from '../books/FilterTitles';
-
+import FilterSeries from '../series/FilterSeries';
+import BookSeries from '../series/BookSeries';
 const Series = () => {
     return (
         <div className='grid-2'>
             <div>
-                {/* <FilterTitles /> */}
-                Filter Series Here
+                <FilterSeries />
             </div>
             <div>
-                {/* <Titles /> */}
-                Series Here
+                <BookSeries />
             </div>
         </div>
     );

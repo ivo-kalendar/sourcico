@@ -7,6 +7,7 @@ import {
     GET_FILTERED_AUTHORS,
     GET_AUTHORS_BY_ID,
     GET_FILTERED_TITLES,
+    GET_FILTERED_SERIES,
 } from './types';
 
 const AuthorsState = (props) => {
@@ -15,6 +16,7 @@ const AuthorsState = (props) => {
         authorId: [],
         authors: [],
         books: [],
+        seriesObj: [],
     };
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -64,6 +66,20 @@ const AuthorsState = (props) => {
         }
     };
 
+    // Get Filtered Series directlly from backend
+    const getFilteredSeries = async (search) => {
+        try {
+            const res = await axios.get(`api/books/series/${search}`);
+
+            dispatch({
+                type: GET_FILTERED_SERIES,
+                payload: res.data,
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         <Context.Provider
             value={{
@@ -71,9 +87,11 @@ const AuthorsState = (props) => {
                 authorId: state.authorId,
                 authors: state.authors,
                 books: state.books,
+                seriesObj: state.seriesObj,
                 getFilteredAuthors,
                 getAuthorsById,
                 getFilteredTitles,
+                getFilteredSeries,
                 loadBetweenGet,
             }}>
             {props.children}
