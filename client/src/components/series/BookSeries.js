@@ -9,7 +9,7 @@ const BookSeries = () => {
 
     const { loading, seriesObj, getFilteredSeries } = context;
 
-    let display = seriesObj.filter((series, i) => i < 5);
+    let display = seriesObj.filter((series, i) => i < 80);
 
     let text = '';
 
@@ -22,8 +22,8 @@ const BookSeries = () => {
 
     return (
         <>
-            {seriesObj.length > 5000 ? (
-                <p>{seriesObj.length}</p>
+            {seriesObj.length > 4000 ? (
+                <p></p>
             ) : !seriesObj.length ? (
                 <p style={{ color: 'rgba(0,0,0,.4)' }} className='text-right'>
                     There are no matching Results for your search :)
