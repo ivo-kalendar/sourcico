@@ -96,9 +96,9 @@ img {
 
 /* Cards */
 .card {
-    padding: 1rem;
+    padding: 0.5rem;
     border: #ccc 1px dotted;
-    margin: 0.7rem 0;
+    margin: 0.2rem 0;
 }
 
 /* List */
@@ -376,8 +376,8 @@ table th {
 
 .navbar a {
     color: #fff;
-    padding: 0.45rem;
-    margin: 0 0.25rem;
+    padding: 0 0 0.15rem 0;
+    margin: 0.55rem;
 }
 
 .navbar a:hover {
@@ -389,6 +389,15 @@ table th {
 }
 
 /* Animation (Add After) */
+@keyframes activeLink {
+    from {
+        border-bottom: 7px solid rgba(255, 255, 255, 0);
+    }
+    to {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    }
+}
+
 .item-enter {
     opacity: 0;
 }

@@ -4,7 +4,7 @@ import FilterTitles from '../books/FilterTitles';
 
 const BookTitles = () => {
     return (
-        <div className='grid-2'>
+        <div>
             <div>
                 <FilterTitles />
             </div>

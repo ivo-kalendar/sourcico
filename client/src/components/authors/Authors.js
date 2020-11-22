@@ -7,13 +7,14 @@ import AuthorProfile from './AuthorProfile';
 const Authors = () => {
     const context = useContext(Context);
 
-    const { loading, authors, getFilteredAuthors } = context;
+    const { loading, authors, getFilteredAuthors, loadBetweenGet } = context;
 
     let display = authors.filter((author, i) => i < 80);
 
     let text = '';
 
     useEffect(() => {
+        loadBetweenGet();
         getFilteredAuthors(text);
         // eslint-disable-next-line
     }, [text]);
@@ -44,13 +45,19 @@ const Authors = () => {
                 </p>
             )}
 
-            {display.length === 1
-                ? display.map((author) => (
-                      <AuthorProfile key={author.id} author={author} />
-                  ))
-                : display.map((author) => (
-                      <AuthorsItem key={author.id} author={author} />
-                  ))}
+            <div>
+                {display.length === 1 ? (
+                    display.map((author) => (
+                        <AuthorProfile key={author.id} author={author} />
+                    ))
+                ) : (
+                    <div className='grid-3'>
+                        {display.map((author) => (
+                            <AuthorsItem key={author.id} author={author} />
+                        ))}
+                    </div>
+                )}
+            </div>
         </>
     );
 };

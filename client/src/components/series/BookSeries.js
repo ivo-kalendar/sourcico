@@ -7,13 +7,14 @@ import SeriesProfile from './SeriesProfile';
 const BookSeries = () => {
     const context = useContext(Context);
 
-    const { loading, seriesObj, getFilteredSeries } = context;
+    const { loading, seriesObj, getFilteredSeries, loadBetweenGet } = context;
 
-    let display = seriesObj.filter((series, i) => i < 80);
+    let display = seriesObj.filter((series, i) => i < 90);
 
     let text = '';
 
     useEffect(() => {
+        loadBetweenGet();
         getFilteredSeries(text);
         // eslint-disable-next-line
     }, [text]);
@@ -43,14 +44,17 @@ const BookSeries = () => {
                 </p>
             )}
 
-            {display.length === 1
-                ? display.map((seriesObj) => (
-                      //   <SeriesProfile key={series.id} series={series} />
-                      <SeriesProfile key={seriesObj.id} seriesObj={seriesObj} />
-                  ))
-                : display.map((seriesObj) => (
-                      <SeriesItem key={seriesObj.id} seriesObj={seriesObj} />
-                  ))}
+            {display.length === 1 ? (
+                display.map((seriesObj) => (
+                    <SeriesProfile key={seriesObj.id} seriesObj={seriesObj} />
+                ))
+            ) : (
+                <div className='grid-3'>
+                    {display.map((seriesObj) => (
+                        <SeriesItem key={seriesObj.id} seriesObj={seriesObj} />
+                    ))}
+                </div>
+            )}
         </>
     );
 };

@@ -13,14 +13,12 @@ const FilterAuthors = () => {
     };
 
     return (
-        <form>
-            <input
-                ref={text}
-                type='text'
-                placeholder='Filter Authors...'
-                onChange={onChange}
-            />
-        </form>
+        <input
+            ref={text}
+            type='text'
+            placeholder='Filter Authors...'
+            onChange={onChange}
+        />
     );
 };
 

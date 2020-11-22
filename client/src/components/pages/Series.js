@@ -1,9 +1,10 @@
 import React from 'react';
 import FilterSeries from '../series/FilterSeries';
 import BookSeries from '../series/BookSeries';
+
 const Series = () => {
     return (
-        <div className='grid-2'>
+        <div>
             <div>
                 <FilterSeries />
             </div>

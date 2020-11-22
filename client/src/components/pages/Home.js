@@ -4,7 +4,7 @@ import FilterAuthors from '../authors/FilterAuthors';
 
 const Home = () => {
     return (
-        <div className='grid-2'>
+        <div>
             <div>
                 <FilterAuthors />
             </div>

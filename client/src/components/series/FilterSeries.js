@@ -13,14 +13,12 @@ const FilterSeries = () => {
     };
 
     return (
-        <form>
-            <input
-                ref={text}
-                type='text'
-                placeholder='Filter Series...'
-                onChange={onChange}
-            />
-        </form>
+        <input
+            ref={text}
+            type='text'
+            placeholder='Filter Series...'
+            onChange={onChange}
+        />
     );
 };
 

@@ -13,14 +13,12 @@ const FilterTitles = () => {
     };
 
     return (
-        <form>
-            <input
-                ref={text}
-                type='text'
-                placeholder='Filter Titles...'
-                onChange={onChange}
-            />
-        </form>
+        <input
+            ref={text}
+            type='text'
+            placeholder='Filter Titles...'
+            onChange={onChange}
+        />
     );
 };
 

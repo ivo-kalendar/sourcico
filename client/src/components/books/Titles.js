@@ -6,13 +6,14 @@ import TitlesItem from './TitlesItem';
 const Titles = () => {
     const context = useContext(Context);
 
-    const { loading, books, getFilteredTitles } = context;
+    const { loading, books, getFilteredTitles, loadBetweenGet } = context;
 
     let display = books.filter((author, i) => i < 80);
 
     let text = '';
 
     useEffect(() => {
+        loadBetweenGet();
         getFilteredTitles(text);
         // eslint-disable-next-line
     }, [text]);
@@ -40,9 +41,11 @@ const Titles = () => {
                 </p>
             )}
 
-            {display.map((obj, index) => (
-                <TitlesItem key={index} obj={obj} />
-            ))}
+            <div className='grid-3'>
+                {display.map((obj, index) => (
+                    <TitlesItem key={index} obj={obj} />
+                ))}
+            </div>
         </>
     );
 };
