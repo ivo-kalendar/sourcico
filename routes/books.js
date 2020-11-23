@@ -12,7 +12,6 @@ class Titles {
 
 let author = data.map((author) => author);
 let books = [];
-
 for (let i = 0; i < author.length; i++) {
     for (let j = 0; j < author[i].books.length; j++) {
         books.push(new Titles(author[i].books[j], author[i].name));
@@ -32,7 +31,7 @@ router.get('/title', (req, res) => {
 router.get('/title/:title', (req, res) => {
     let regExp = new RegExp(req.params.title, 'gi');
 
-    books = books
+    finalBooks = books
         .map((x) => {
             if (x.book.title.match(regExp)) {
                 return x;
@@ -40,7 +39,7 @@ router.get('/title/:title', (req, res) => {
         })
         .filter((x) => x != null);
 
-    res.status(200).json(books);
+    res.status(200).json(finalBooks);
 });
 
 // @data    change the datastructure for the series routes
