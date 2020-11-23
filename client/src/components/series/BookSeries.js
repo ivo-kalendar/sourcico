@@ -45,13 +45,13 @@ const BookSeries = () => {
             )}
 
             {display.length === 1 ? (
-                display.map((seriesObj) => (
-                    <SeriesProfile key={seriesObj.id} seriesObj={seriesObj} />
+                display.map((seriesObj, i) => (
+                    <SeriesProfile key={`00${i}`} seriesObj={seriesObj} />
                 ))
             ) : (
                 <div className='grid-3'>
-                    {display.map((seriesObj) => (
-                        <SeriesItem key={seriesObj.id} seriesObj={seriesObj} />
+                    {display.map((seriesObj, i) => (
+                        <SeriesItem key={`00${i}`} seriesObj={seriesObj} />
                     ))}
                 </div>
             )}
