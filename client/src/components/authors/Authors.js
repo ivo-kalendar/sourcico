@@ -9,7 +9,7 @@ const Authors = () => {
 
     const { loading, authors, getFilteredAuthors, loadBetweenGet } = context;
 
-    let display = authors.filter((author, i) => i < 80);
+    let display = authors.filter((author, i) => i < 90);
 
     let text = '';
 

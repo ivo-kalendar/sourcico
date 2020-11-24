@@ -6,18 +6,15 @@ import PropTypes from 'prop-types';
 const AuthorsItem = ({ author }) => {
     const context = useContext(Context);
 
-    const { name, books, id } = author;
-    let { inputField, getFilteredAuthors } = context;
+    const { name, books } = author;
+    let { getFilteredAuthors } = context;
+
+    const clickedName = () => getFilteredAuthors(name);
 
     return (
         <div className='card bg-light'>
             <h3 className='text-primary text-left'>
-                <Link
-                    onClick={() => {
-                        // inputField = 'hello';
-                        getFilteredAuthors(name);
-                    }}
-                    to='/'>
+                <Link onClick={clickedName} to='/'>
                     {name}{' '}
                 </Link>
                 <span style={{ float: 'right' }} className='badge badge-light'>

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Context from '../context/context';
+import { v4 as uuidv4 } from 'uuid';
 import Spiner from '../layout/Spinner';
 import SeriesItem from './SeriesItem';
 import SeriesProfile from './SeriesProfile';
@@ -44,14 +45,14 @@ const BookSeries = () => {
                 </p>
             )}
 
-            {display.length === 1 ? (
-                display.map((seriesObj, i) => (
-                    <SeriesProfile key={`00${i}`} seriesObj={seriesObj} />
+            {display.length < 20 ? (
+                display.map((seriesObj) => (
+                    <SeriesProfile key={uuidv4()} seriesObj={seriesObj} />
                 ))
             ) : (
                 <div className='grid-3'>
-                    {display.map((seriesObj, i) => (
-                        <SeriesItem key={`00${i}`} seriesObj={seriesObj} />
+                    {display.map((seriesObj) => (
+                        <SeriesItem key={uuidv4()} seriesObj={seriesObj} />
                     ))}
                 </div>
             )}

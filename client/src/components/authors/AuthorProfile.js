@@ -22,7 +22,6 @@ const AuthorProfile = ({ author }) => {
                             style={{
                                 gridTemplateColumns: 'auto auto',
                             }}>
-                            {/* <h3 className='text-primary text-left'>{name}</h3> */}
                             <div className='text-primary large'>{name}</div>
                             <div className='text-right'>
                                 Profile Id:{' '}

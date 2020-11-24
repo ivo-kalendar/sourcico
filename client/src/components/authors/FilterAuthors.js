@@ -1,15 +1,11 @@
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import Context from '../context/context';
 
 const FilterAuthors = () => {
     const context = useContext(Context);
     const text = useRef('');
 
-    let { inputField, loadBetweenGet, getFilteredAuthors } = context;
-
-    // useEffect(() => {
-    //     console.log(inputField);
-    // });
+    let { loadBetweenGet, getFilteredAuthors } = context;
 
     const onChange = (e) => {
         loadBetweenGet();

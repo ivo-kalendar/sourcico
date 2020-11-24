@@ -8,7 +8,7 @@ const Titles = () => {
 
     const { loading, books, getFilteredTitles, loadBetweenGet } = context;
 
-    let display = books.filter((author, i) => i < 80);
+    let display = books.filter((author, i) => i < 180);
 
     let text = '';
 

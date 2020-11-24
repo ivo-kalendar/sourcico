@@ -17,7 +17,6 @@ const AuthorsState = (props) => {
         authors: [],
         books: [],
         seriesObj: [],
-        inputField: '',
     };
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -89,7 +88,6 @@ const AuthorsState = (props) => {
                 authors: state.authors,
                 books: state.books,
                 seriesObj: state.seriesObj,
-                inputField: state.inputField,
                 getFilteredAuthors,
                 getAuthorsById,
                 getFilteredTitles,
