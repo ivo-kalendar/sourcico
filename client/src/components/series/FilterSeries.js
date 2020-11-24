@@ -14,6 +14,7 @@ const FilterSeries = () => {
 
     return (
         <input
+            autoFocus={true}
             ref={text}
             type='text'
             placeholder='Filter Series...'

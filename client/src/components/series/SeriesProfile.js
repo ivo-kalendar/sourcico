@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 const SeriesProfile = ({ seriesObj }) => {
     const { series, titles } = seriesObj;
@@ -10,7 +11,7 @@ const SeriesProfile = ({ seriesObj }) => {
             <ul>
                 {titles.map(({ id, title, author }, i) => {
                     return (
-                        <li className='text-success text-center' key={i + id}>
+                        <li className='text-success text-center' key={uuidv4()}>
                             {i > 0 && author === titles[i - 1].author ? (
                                 <span></span>
                             ) : (

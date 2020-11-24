@@ -7,8 +7,12 @@ app.use(express.json({ extended: false }));
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
 // Define Routes
-app.use('/api/authors', require('./routes/authors'));
-app.use('/api/books', require('./routes/books'));
+app.use('/api/authors', require('./routes/authorsdb'));
+app.use(
+    '/api/books',
+    require('./routes/titlesdb'),
+    require('./routes/seriesdb')
+);
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {

@@ -14,6 +14,7 @@ const FilterTitles = () => {
 
     return (
         <input
+            autoFocus={true}
             ref={text}
             type='text'
             placeholder='Filter Titles...'
