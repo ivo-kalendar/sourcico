@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Context from '../context/context';
 import PropTypes from 'prop-types';
-
+import { RiArrowGoBackLine } from 'react-icons/ri';
 const AuthorProfile = ({ author }) => {
     const context = useContext(Context);
 
-    let { authorId, getAuthorsById } = context;
+    let { authorId, getAuthorsById, getFilteredAuthors } = context;
 
     useEffect(() => {
         getAuthorsById(author.id);
@@ -22,13 +23,38 @@ const AuthorProfile = ({ author }) => {
                             style={{
                                 gridTemplateColumns: 'auto auto',
                             }}>
-                            <div className='text-primary large'>{name}</div>
+                            <div className='text-primary large'>
+                                <a
+                                    target='_blank'
+                                    href={`//www.google.com/search?q=${name}`}>
+                                    {name}
+                                </a>
+                            </div>
                             <div className='text-right'>
                                 Profile Id:{' '}
                                 <span className='text-primary'>{id}</span>
+                                <p>
+                                    <a
+                                        target='_blank'
+                                        href={`//en.wikipedia.org/wiki/${name}`}>
+                                        check {name.split(' ')[0]}'s Wikipedia
+                                        page
+                                    </a>
+                                </p>
                             </div>
                         </div>
-                        <p className='text-left'>Author of:</p>
+                        <div
+                            className='grid-2'
+                            style={{ gridTemplateColumns: '1fr 1fr' }}>
+                            <p>Author of:</p>
+                            <p className='text-right'>
+                                <Link
+                                    to='/'
+                                    onClick={() => getFilteredAuthors('')}>
+                                    <RiArrowGoBackLine />
+                                </Link>
+                            </p>
+                        </div>
                         {books.map((book) => (
                             <div key={book.id} className='card'>
                                 <div

@@ -9,7 +9,11 @@ const AuthorsItem = ({ author }) => {
     const { name, books } = author;
     let { getFilteredAuthors } = context;
 
-    const clickedName = () => getFilteredAuthors(name);
+    const clickedName = () => {
+        getFilteredAuthors(name);
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    };
 
     return (
         <div className='card bg-light'>
