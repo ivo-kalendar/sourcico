@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Context from '../context/context';
 import PropTypes from 'prop-types';
 import { RiArrowGoBackLine } from 'react-icons/ri';
+
 const AuthorProfile = ({ author }) => {
     const context = useContext(Context);
 
@@ -26,6 +27,7 @@ const AuthorProfile = ({ author }) => {
                             <div className='text-primary large'>
                                 <a
                                     target='_blank'
+                                    rel='noreferrer'
                                     href={`//www.google.com/search?q=${name}`}>
                                     {name}
                                 </a>
@@ -36,6 +38,7 @@ const AuthorProfile = ({ author }) => {
                                 <p>
                                     <a
                                         target='_blank'
+                                        rel='noreferrer'
                                         href={`//en.wikipedia.org/wiki/${name}`}>
                                         check {name.split(' ')[0]}'s Wikipedia
                                         page

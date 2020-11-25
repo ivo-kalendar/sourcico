@@ -9,7 +9,11 @@ const SeriesItem = ({ seriesObj }) => {
 
     const { getFilteredSeries } = context;
 
-    const clickedSeries = () => getFilteredSeries(series);
+    const clickedSeries = () => {
+        getFilteredSeries(series);
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    };
 
     return (
         <div className='card bg-light'>
